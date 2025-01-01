@@ -1,13 +1,14 @@
-"use client";
-import { Input } from "@core/ui/components/input";
-import { Label } from "@core/ui/components/label";
-import { Checkbox } from "@core/ui/components/checkbox";
-import { Button } from "@core/ui/components/button";
+'use client'
+import { Input } from '@core/ui/components/input'
+import { Label } from '@core/ui/components/label'
+import { Checkbox } from '@core/ui/components/checkbox'
+import { Button } from '@core/ui/components/button'
 
-import { useState } from "react";
+import { useState } from 'react'
+import AuthProviders from '../components/providers'
 
 export default function SignInPage() {
-  const [rememberMe, setRememberMe] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false)
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-white p-4">
@@ -20,8 +21,8 @@ export default function SignInPage() {
           <h2 className="text-3xl font-bold">GIVY CRM WEBAPP</h2>
           <p className="text-sm text-gray-400 mt-2">@Givy</p>
           <p className="text-sm text-gray-400 mt-4 max-w-sm mx-auto">
-            The CRM platform that is simple to set up and easy to use Givy lets
-            you handle all your customers, campaign, and coupon in one place.
+            The CRM platform that is simple to set up and easy to use Givy lets you handle all your
+            customers, campaign, and coupon in one place.
           </p>
         </div>
         <form className="mt-8 space-y-6">
@@ -62,10 +63,7 @@ export default function SignInPage() {
                 onCheckedChange={(checked) => setRememberMe(checked as boolean)}
                 className="border-gray-600"
               />
-              <Label
-                htmlFor="remember-me"
-                className="ml-2 block text-sm text-gray-400"
-              >
+              <Label htmlFor="remember-me" className="ml-2 block text-sm text-gray-400">
                 Remember
               </Label>
             </div>
@@ -77,10 +75,7 @@ export default function SignInPage() {
           </div>
 
           <div>
-            <Button
-              type="submit"
-              className="w-full bg-purple-600 hover:bg-purple-700"
-            >
+            <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700">
               Sign In
             </Button>
           </div>
@@ -93,7 +88,13 @@ export default function SignInPage() {
             Create membership
           </Button>
         </div>
+        <div className="text-center">
+          <h2 className="text-xl font-semibold text-center text-gray-800 mb-4">
+            Other sign in options
+          </h2>
+          <AuthProviders isSignUp={false} />
+        </div>
       </div>
     </div>
-  );
+  )
 }

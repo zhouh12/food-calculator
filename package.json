@@ -2,19 +2,24 @@
   "name": "stone",
   "private": true,
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
+    "build": "dotenv -- turbo build",
+    "dev": "dotenv -- turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
     "@core/eslint-config": "workspace:*",
     "@core/typescript-config": "workspace:*",
+    "@vitejs/plugin-react": "^4.2.1",
+    "dotenv-cli": "^7.4.2",
+    "jsdom": "^25.0.1",
     "prettier": "^3.2.5",
-    "turbo": "latest"
+    "turbo": "latest",
+    "vitest": "^2.1.2"
   },
   "packageManager": "pnpm@8.9.0",
   "engines": {
     "node": ">=18"
-  }
+  },
+  "type": "module"
 }

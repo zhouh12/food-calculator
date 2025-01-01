@@ -1,23 +1,22 @@
-import { create } from "zustand";
+import { create } from 'zustand'
 
 interface Order {
-  id: string;
-  name: string;
-  price: number;
+  id: string
+  name: string
+  price: number
 }
 
 type BearState = {
-  order: Order | undefined;
-  setOrder: (order: Order) => void;
-};
+  order: Order | undefined
+  setOrder: (order: Order) => void
+}
 
 const useStore = create<BearState>((set) => ({
   order: undefined,
-  setOrder: () => set((state) => ({ order:state.order })),
-}));
+  setOrder: () => set((state) => ({ order: state.order })),
+}))
 
-export {useStore}
-
+export { useStore }
 
 // import { getOrders } from 'src/services/order-request-service';
 // import type { OrderEntryItemDto } from 'fb-shared/order-entry-api';
