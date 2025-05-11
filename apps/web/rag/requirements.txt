@@ -1,0 +1,9 @@
+fastapi
+python-multipart
+httpx
+google-generativeai
+pydantic
+pydantic-settings
+uvicorn
+python-dotenv
+pillow  # for image processing 

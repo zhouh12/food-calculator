@@ -1,6 +1,6 @@
 'use client'
 
-import { useProfileStore } from '../../stores/profile-store'
+import { useProfileStore } from '../../../stores/profile-store'
 import { GenderStep } from './components/gender-step'
 // import { WorkoutsStep } from '../components/workouts-step'
 // import { GoalsStep } from '../components/goals-step'

@@ -1,7 +1,7 @@
 'use server'
 
-import { updateProfile as updateProfileCore } from '../../../core/users/update-profile'
-import { ProfileFormData } from '../../../core/types/profile'
+import { updateProfile as updateProfileCore } from '../../../../core/users/update-profile'
+import { ProfileFormData } from '../../../../core/types/profile'
 
 export async function updateProfile(data: ProfileFormData) {
   return updateProfileCore({

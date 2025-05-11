@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@core/ui/components/button'
-import { useProfileStore } from '../../../stores/profile-store'
+import { useProfileStore } from '../../../../stores/profile-store'
 
 export function GenderStep() {
   const { updateFormData, setStep } = useProfileStore()

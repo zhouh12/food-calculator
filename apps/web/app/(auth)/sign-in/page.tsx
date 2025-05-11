@@ -11,7 +11,7 @@ export default function SignInPage() {
   const [rememberMe, setRememberMe] = useState(false)
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black text-white p-4">
+    <div className="min-h-screen flex items-center justify-center text-white p-4">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
           <div className="flex justify-center space-x-2 mb-4">

@@ -1,9 +1,9 @@
 'use client'
 
 import { Button } from '@core/ui/components/button'
-import { useProfileStore } from '../../../stores/profile-store'
+import { useProfileStore } from '../../../../stores/profile-store'
 import { updateProfile } from '../actions/update-profile'
-import { ProfileFormData } from '../../../core/types/profile'
+import { ProfileFormData } from '../../../../core/types/profile'
 import { Input } from '@core/ui/components/input'
 
 export function MeasurementsStep() {
