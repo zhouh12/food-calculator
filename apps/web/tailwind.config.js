@@ -14,11 +14,17 @@ export default {
         ...sharedConfig.theme.extend.colors,
         primary: {
           DEFAULT: '#6843EC',
-          foreground: '#fff',
+          foreground: '#FFFFFF',
         },
         background: {
           DEFAULT: '#F6FAFD',
+          secondary: '#FFFFFF',
         },
+        // fitness: {
+        //   primary: '#4F46E5', // Indigo-600
+        //   secondary: '#7C3AED', // Violet-600
+        //   light: '#F8FAFC', // Slate-50
+        // },
         sidebar: {
           DEFAULT: '#F6FAFD',
           foreground: '#575757',
