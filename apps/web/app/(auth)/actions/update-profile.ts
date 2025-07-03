@@ -1,20 +1,8 @@
 'use server'
 
-import { updateProfile as updateProfileCore } from '../../../core/users/update-profile'
+import { saveProfile } from '@/core/users/save-profile'
 import { revalidatePath } from 'next/cache'
-import { UpdateProfileRequest } from '../../../core/users/update-profile'
-
-export async function updateProfile(data: UpdateProfileRequest) {
-  return updateProfileCore({
-    age: data.age,
-    weight: data.weight,
-    goal: data.goal,
-    workoutsPerWeek: data.workoutsPerWeek,
-    gender: data.gender,
-    height: data.height,
-    activityLevel: data.activityLevel,
-  })
-}
+import { UpdateProfileRequest } from '@/core/users/save-profile'
 
 type OnboardingStepData = {
   step: number
@@ -81,7 +69,7 @@ export async function saveOnboardingStep(stepData: OnboardingStepData) {
         workoutsPerWeek: 3, // Default value
       }
 
-      const result = await updateProfileCore(profileData)
+      const result = await saveProfile(profileData)
 
       // Revalidate the profile page cache
       revalidatePath('/profile')

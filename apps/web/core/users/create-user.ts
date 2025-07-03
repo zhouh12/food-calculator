@@ -1,6 +1,6 @@
 import { hash } from 'bcryptjs'
-import { db } from '../../db/drizzle'
-import { users } from '../../db/schema/users'
+import { db } from '@/db/drizzle'
+import { users } from '@/db/schema/users'
 
 type CreateUserRequest = {
   name: string

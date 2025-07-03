@@ -1,4 +1,4 @@
-import { cn } from '@ui/lib/utils'
+import { cn } from '@core/ui/lib/utils'
 
 type SelectionCardProps = {
   title: string

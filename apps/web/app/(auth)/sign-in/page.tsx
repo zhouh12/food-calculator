@@ -5,7 +5,7 @@ import { Checkbox } from '@core/ui/components/checkbox'
 import { Button } from '@core/ui/components/button'
 
 import { useState } from 'react'
-import AuthProviders from '../components/providers'
+import AuthProviders from '@/(auth)/components/providers'
 
 export default function SignInPage() {
   const [rememberMe, setRememberMe] = useState(false)

@@ -1,6 +1,6 @@
 'use server'
 
-import { createUser } from '../../../core/users/create-user'
+import { createUser } from '@/core/users/create-user'
 
 export async function signUp(formData: FormData) {
   const name = formData.get('name') as string

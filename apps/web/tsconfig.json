@@ -5,7 +5,14 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@/*": ["./app/*"],
+      "@/core/*": ["./core/*"],
+      "@/db/*": ["./db/*"],
+      "@/lib/*": ["./lib/*"],
+      "@/stores/*": ["./stores/*"]
+    }
   },
   "include": [
     "next-env.d.ts",

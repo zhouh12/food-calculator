@@ -4,7 +4,7 @@ import { GoalCard } from './components/goal-card'
 import { useState } from 'react'
 import { SelectionCard } from './components/selection-card'
 import { NumberInput } from './components/number-input'
-import { saveOnboardingStep } from '../actions/update-profile'
+import { saveOnboardingStep } from '@/(auth)/actions/update-profile'
 
 const TOTAL_STEPS = 6
 

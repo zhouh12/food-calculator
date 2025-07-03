@@ -2,7 +2,7 @@
 import { Input } from '@core/ui/components/input'
 import { Button } from '@core/ui/components/button'
 import { useState } from 'react'
-import { signUp } from '../actions/sign-up'
+import { signUp } from '@/(auth)/actions/sign-up'
 
 export default function SignUp() {
   const [rememberMe, setRememberMe] = useState(false)

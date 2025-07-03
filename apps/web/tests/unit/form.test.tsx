@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 // import Form from '../../src/components/ui/form/form'
-import HomePage from '../../app/form/page'
+import HomePage from '@/form/page'
 
 describe('Form Component', () => {
   //   it('renders the form with initial values', () => {

@@ -1,9 +1,9 @@
 import { getServerSession } from 'next-auth'
-import { authOptions } from '../types/auth'
-import { db } from '../../db/drizzle'
+import { authOptions } from '@/core/types/auth'
+import { db } from '@/db/drizzle'
 import { eq } from 'drizzle-orm'
-import { users } from '../../db/schema/users'
-import { profiles } from '../../db/schema/profiles'
+import { users } from '@/db/schema/users'
+import { profiles } from '@/db/schema/profiles'
 
 export type UserGoal = 'GAIN_WEIGHT' | 'LOSE_FAT' | 'MAINTAIN'
 
@@ -22,7 +22,7 @@ type UpdateProfileResponse = {
   error?: string
 }
 
-export async function updateProfile(request: UpdateProfileRequest): Promise<UpdateProfileResponse> {
+export async function saveProfile(request: UpdateProfileRequest): Promise<UpdateProfileResponse> {
   const session = await getServerSession(authOptions)
   if (!session?.user?.email) {
     return { error: 'Unauthorized' }
