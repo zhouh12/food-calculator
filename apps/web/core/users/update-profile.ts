@@ -1,16 +1,20 @@
 import { getServerSession } from 'next-auth'
+import { authOptions } from '../types/auth'
 import { db } from '../../db/drizzle'
 import { eq } from 'drizzle-orm'
 import { users } from '../../db/schema/users'
 import { profiles } from '../../db/schema/profiles'
-import { UserGoal } from '../types/profile'
 
-type UpdateProfileRequest = {
+export type UserGoal = 'GAIN_WEIGHT' | 'LOSE_FAT' | 'MAINTAIN'
+
+export type UpdateProfileRequest = {
   age: number
   weight: number
   goal: UserGoal
   workoutsPerWeek: number
   gender: 'MALE' | 'FEMALE' | 'OTHER'
+  height: number
+  activityLevel: 'LOW' | 'MODERATE' | 'HIGH'
 }
 
 type UpdateProfileResponse = {
@@ -19,8 +23,7 @@ type UpdateProfileResponse = {
 }
 
 export async function updateProfile(request: UpdateProfileRequest): Promise<UpdateProfileResponse> {
-  const session = await getServerSession()
-
+  const session = await getServerSession(authOptions)
   if (!session?.user?.email) {
     return { error: 'Unauthorized' }
   }
@@ -37,15 +40,36 @@ export async function updateProfile(request: UpdateProfileRequest): Promise<Upda
       return { error: 'User not found' }
     }
 
-    await db.insert(profiles).values({
-      UserId: user.Id,
-      Age: request.age,
-      Weight: request.weight,
-      Goal: request.goal,
-      WorkoutsPerWeek: request.workoutsPerWeek,
-      Gender: request.gender,
-    })
+    const existingProfile = await db
+      .select()
+      .from(profiles)
+      .where(eq(profiles.UserId, user.Id))
+      .limit(1)
+      .then((rows) => rows[0])
 
+    if (existingProfile) {
+      await db
+        .update(profiles)
+        .set({
+          Age: request.age,
+          Weight: request.weight,
+          Goal: request.goal,
+          Gender: request.gender,
+          ActivityLevel: request.activityLevel,
+          Height: request.height,
+        })
+        .where(eq(profiles.UserId, user.Id))
+    } else {
+      await db.insert(profiles).values({
+        UserId: user.Id,
+        Age: request.age,
+        Weight: request.weight,
+        Goal: request.goal,
+        Gender: request.gender,
+        ActivityLevel: request.activityLevel,
+        Height: request.height,
+      })
+    }
     return { success: true }
   } catch (error) {
     console.error('Profile update error:', error)

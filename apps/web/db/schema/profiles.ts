@@ -8,7 +8,8 @@ export const profiles = pgTable('Profiles', {
     .references(() => users.Id),
   Age: integer('Age').notNull(),
   Weight: integer('Weight').notNull(),
+  Height: integer('Height').notNull(),
   Goal: varchar('Goal', { length: 20 }).notNull(),
-  WorkoutsPerWeek: integer('WorkoutsPerWeek').notNull(),
   Gender: varchar('Gender', { length: 10 }).notNull(),
+  ActivityLevel: varchar('ActivityLevel', { length: 20 }).notNull(),
 })

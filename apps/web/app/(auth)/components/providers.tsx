@@ -9,7 +9,7 @@ interface AuthProvidersProps {
 
 export default function AuthProviders({ isSignUp = false }: AuthProvidersProps) {
   const handleGoogleSignIn = () => {
-    signIn('google')
+    signIn('google', { callbackUrl: '/profile' })
   }
 
   const handleSignUp = () => {

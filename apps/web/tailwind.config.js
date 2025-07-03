@@ -13,7 +13,7 @@ export default {
       colors: {
         ...sharedConfig.theme.extend.colors,
         primary: {
-          DEFAULT: '#6843EC',
+          DEFAULT: '#514EF3',
           foreground: '#FFFFFF',
         },
         background: {

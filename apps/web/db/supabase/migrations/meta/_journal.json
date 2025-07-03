@@ -15,6 +15,13 @@
       "when": 1735554945620,
       "tag": "0001_fair_vivisector",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1750479675910,
+      "tag": "0002_yummy_thena",
+      "breakpoints": true
     }
   ]
 }

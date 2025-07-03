@@ -4,21 +4,58 @@ import { GoalCard } from './components/goal-card'
 import { useState } from 'react'
 import { SelectionCard } from './components/selection-card'
 import { NumberInput } from './components/number-input'
+import { saveOnboardingStep } from '../actions/update-profile'
 
 const TOTAL_STEPS = 6
 
+type GoalType = 'lose_fat' | 'build_muscle' | 'improve_fitness' | 'maintain_weight'
+type ActivityType = 'sedentary' | 'lightly_active' | 'moderately_active' | 'very_active'
+
 export default function ProfileSetup() {
   const [step, setStep] = useState(1)
-  const [goal, setGoal] = useState<string | null>(null)
+  const [goal, setGoal] = useState<GoalType | null>(null)
   const [gender, setGender] = useState<'male' | 'female' | null>(null)
   const [age, setAge] = useState(30)
   const [height, setHeight] = useState(170)
   const [weight, setWeight] = useState(70)
-  const [activityLevel, setActivityLevel] = useState<string | null>(null)
+  const [activityLevel, setActivityLevel] = useState<ActivityType | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const nextStep = () => {
-    window.scrollTo(0, 0)
-    setStep((prev) => prev + 1)
+  const nextStep = async () => {
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      // Prepare data for current step
+      const stepData = {
+        step,
+        goal: goal || undefined,
+        gender: gender || undefined,
+        age,
+        height,
+        weight,
+        activityLevel: activityLevel || undefined,
+      }
+
+      // Save the step data
+      const result = await saveOnboardingStep(stepData)
+
+      if (!result.success) {
+        setError(result.error || 'Failed to save data')
+        setIsLoading(false)
+        return
+      }
+
+      // Move to next step
+      window.scrollTo(0, 0)
+      setStep((prev) => prev + 1)
+    } catch (error) {
+      console.error('Error saving step:', error)
+      setError('Failed to save data. Please try again.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const renderStep = () => {
@@ -31,8 +68,14 @@ export default function ProfileSetup() {
             title="Welcome! Let's get started"
             subtitle="What is your primary fitness goal?"
             onNext={nextStep}
-            hideNextButton={!goal}
+            hideNextButton={!goal || isLoading}
+            nextButtonText={isLoading ? 'Saving...' : 'Next'}
           >
+            {error && (
+              <div className="mb-4 p-3 bg-red-100 border border-red-300 text-red-700 rounded-lg">
+                {error}
+              </div>
+            )}
             <div className="space-y-4">
               <GoalCard
                 title="Lose Fat"
@@ -74,8 +117,14 @@ export default function ProfileSetup() {
             title="What is your gender?"
             subtitle="We use this to calculate your caloric needs"
             onNext={nextStep}
-            hideNextButton={!gender}
+            hideNextButton={!gender || isLoading}
+            nextButtonText={isLoading ? 'Saving...' : 'Next'}
           >
+            {error && (
+              <div className="mb-4 p-3 bg-red-100 border border-red-300 text-red-700 rounded-lg">
+                {error}
+              </div>
+            )}
             <div className="grid grid-cols-2 gap-4 max-w-xs mx-auto">
               <SelectionCard
                 title="Male"
@@ -103,7 +152,14 @@ export default function ProfileSetup() {
             title="How old are you?"
             subtitle="Your age helps us tailor recommendations"
             onNext={nextStep}
+            hideNextButton={isLoading}
+            nextButtonText={isLoading ? 'Saving...' : 'Next'}
           >
+            {error && (
+              <div className="mb-4 p-3 bg-red-100 border border-red-300 text-red-700 rounded-lg">
+                {error}
+              </div>
+            )}
             <div className="flex flex-col items-center justify-center py-8">
               <NumberInput
                 value={age}
@@ -125,7 +181,14 @@ export default function ProfileSetup() {
             title="What is your height?"
             subtitle="This helps us calculate your body metrics"
             onNext={nextStep}
+            hideNextButton={isLoading}
+            nextButtonText={isLoading ? 'Saving...' : 'Next'}
           >
+            {error && (
+              <div className="mb-4 p-3 bg-red-100 border border-red-300 text-red-700 rounded-lg">
+                {error}
+              </div>
+            )}
             <div className="flex flex-col items-center justify-center py-8">
               <NumberInput
                 value={height}
@@ -147,7 +210,14 @@ export default function ProfileSetup() {
             title="What is your weight?"
             subtitle="This helps us set your initial goals"
             onNext={nextStep}
+            hideNextButton={isLoading}
+            nextButtonText={isLoading ? 'Saving...' : 'Next'}
           >
+            {error && (
+              <div className="mb-4 p-3 bg-red-100 border border-red-300 text-red-700 rounded-lg">
+                {error}
+              </div>
+            )}
             <div className="flex flex-col items-center justify-center py-8">
               <NumberInput
                 value={weight}
@@ -169,9 +239,14 @@ export default function ProfileSetup() {
             title="What is your activity level?"
             subtitle="This affects your daily calorie needs"
             onNext={nextStep}
-            hideNextButton={!activityLevel}
-            nextButtonText="See My Plan"
+            hideNextButton={!activityLevel || isLoading}
+            nextButtonText={isLoading ? 'Saving Profile...' : 'Save My Profile'}
           >
+            {error && (
+              <div className="mb-4 p-3 bg-red-100 border border-red-300 text-red-700 rounded-lg">
+                {error}
+              </div>
+            )}
             <div className="space-y-4">
               <GoalCard
                 title="Sedentary"
