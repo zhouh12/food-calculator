@@ -6,4 +6,5 @@ pydantic
 pydantic-settings
 uvicorn
 python-dotenv
-pillow  # for image processing 
+pillow  # for image processing
+requests  # for downloading images from URLs 
