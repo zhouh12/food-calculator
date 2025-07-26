@@ -1,0 +1,23 @@
+[project]
+name = "sst"
+version = "0.1.0"
+description = "Python Lambda functions for Stone API"
+requires-python = "==3.11.*"
+dependencies = [
+    "requests>=2.31.0",
+    "boto3>=1.28.0",
+    "python-dateutil>=2.8.0",
+]
+
+[tool.uv.workspace]
+members = ["functions"]
+
+[tool.uv]
+dev-dependencies = [
+    # Development dependencies
+    # "pytest>=7.0.0",
+    # "black>=23.0.0",
+    # "flake8>=6.0.0",
+]
+
+
