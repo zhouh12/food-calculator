@@ -5,7 +5,11 @@
     "build": "dotenv -- turbo build",
     "dev": "dotenv -- turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "mobile": "turbo start --filter=mobile",
+    "mobile:ios": "turbo ios --filter=mobile",
+    "mobile:android": "turbo android --filter=mobile",
+    "mobile:web": "turbo web --filter=mobile"
   },
   "devDependencies": {
     "@core/eslint-config": "workspace:*",
