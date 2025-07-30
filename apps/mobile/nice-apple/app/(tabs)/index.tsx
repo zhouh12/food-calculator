@@ -1,78 +1,140 @@
-import { Image } from 'expo-image'
-import { Platform, StyleSheet, Text } from 'react-native'
+import React from 'react'
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native'
+import { router } from 'expo-router'
+import { LinearGradient } from 'expo-linear-gradient'
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  FadeInUp,
+  FadeInDown,
+} from 'react-native-reanimated'
 
-import { HelloWave } from '@/components/HelloWave'
-import ParallaxScrollView from '@/components/ParallaxScrollView'
-import { ThemedText } from '@/components/ThemedText'
-import { ThemedView } from '@/components/ThemedView'
+const { width } = Dimensions.get('window')
 
 export default function HomeScreen() {
+  const handleGetStarted = () => {
+    router.push('/(auth)/profile')
+  }
+
+  const handleSignIn = () => {
+    // 这里可以导航到登录页面
+    console.log('Navigate to Sign In')
+  }
+
+  const buttonScale = useSharedValue(1)
+
+  const animatedButtonStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: buttonScale.value }],
+  }))
+
+  const handleButtonPress = () => {
+    // Simplified animation to avoid iOS crash
+    buttonScale.value = withSpring(0.96, { duration: 100 })
+
+    // Use setTimeout to avoid callback issues
+    setTimeout(() => {
+      buttonScale.value = withSpring(1)
+      handleGetStarted()
+    }, 100)
+  }
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }
-    >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle" className="text-blue-500">
-          Step 1: Try it again
-        </ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+
+      <View style={styles.contentSection}>
+        <LinearGradient colors={['#ffffff', '#f8fafc']} style={styles.contentBackground}>
+          {/* 标题 */}
+          <Animated.View style={styles.titleContainer} entering={FadeInUp.delay(200).springify()}>
+            <Text style={styles.title}>Calorie tracking</Text>
+            <Text style={styles.title}>made easy</Text>
+          </Animated.View>
+
+          {/* 按钮区域 */}
+          <Animated.View style={styles.buttonContainer} entering={FadeInUp.delay(400).springify()}>
+            <TouchableOpacity onPress={handleButtonPress} activeOpacity={0.8}>
+              <Animated.View
+                style={[styles.getStartedButton, animatedButtonStyle]}
+                className="bg-purple-900"
+              >
+                <Text style={styles.getStartedText}>Get Started</Text>
+              </Animated.View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={handleSignIn}>
+              <Text style={styles.signInText}>
+                Already have an account? <Text style={styles.signInLink}>Sign In</Text>
+              </Text>
+            </TouchableOpacity>
+          </Animated.View>
+        </LinearGradient>
+      </View>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  contentSection: {
+    flex: 1,
+  },
+  contentBackground: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 24,
+  },
   titleContainer: {
-    flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    marginBottom: 60,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  title: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    color: '#000000',
+    textAlign: 'center',
+    lineHeight: 42,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  buttonContainer: {
+    alignItems: 'center',
+  },
+  getStartedButton: {
+    width: width - 48,
+    height: 60,
+    backgroundColor: '#514EF3',
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 6,
+  },
+  getStartedText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  signInText: {
+    fontSize: 16,
+    color: '#666666',
+    textAlign: 'center',
+  },
+  signInLink: {
+    color: '#000000',
+    fontWeight: '600',
   },
 })
