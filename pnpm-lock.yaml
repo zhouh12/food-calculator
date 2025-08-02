@@ -163,6 +163,18 @@ importers:
         specifier: ^5.3.3
         version: 5.4.2
 
+  packages/types:
+    devDependencies:
+      '@core/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@core/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      typescript:
+        specifier: ^5.3.3
+        version: 5.4.2
+
   packages/typescript-config: {}
 
   packages/ui:

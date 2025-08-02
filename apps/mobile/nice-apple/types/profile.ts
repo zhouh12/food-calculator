@@ -76,15 +76,6 @@ export const FITNESS_GOALS: FitnessGoal[] = [
     gradientColors: ['#faf5ff', '#e9d5ff'],
   },
   {
-    id: 'improve-fitness',
-    title: 'Improve Fitness',
-    description: 'Enhance overall fitness and health',
-    icon: '🏃‍♀️',
-    color: 'text-green-600',
-    bgColor: 'bg-green-50 border-green-200',
-    gradientColors: ['#f0fdf4', '#bbf7d0'],
-  },
-  {
     id: 'maintain-weight',
     title: 'Maintain Weight',
     description: 'Stay at your current weight',

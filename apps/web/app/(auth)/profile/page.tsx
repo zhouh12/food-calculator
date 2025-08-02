@@ -92,13 +92,6 @@ export default function ProfileSetup() {
                 onClick={() => setGoal('build_muscle')}
               />
               <GoalCard
-                title="Improve Fitness"
-                description="Enhance overall fitness and health"
-                icon="🏃"
-                isSelected={goal === 'improve_fitness'}
-                onClick={() => setGoal('improve_fitness')}
-              />
-              <GoalCard
                 title="Maintain Weight"
                 description="Stay at your current weight"
                 icon="⚖️"

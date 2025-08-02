@@ -19,8 +19,7 @@ function mapGoalToDbValue(goal: string): UpdateProfileRequest['goal'] {
     case 'lose_fat':
       return 'LOSE_FAT'
     case 'build_muscle':
-    case 'improve_fitness':
-      return 'GAIN_WEIGHT'
+      return 'BUILD_MUSCLE'
     case 'maintain_weight':
       return 'MAINTAIN'
     default:
