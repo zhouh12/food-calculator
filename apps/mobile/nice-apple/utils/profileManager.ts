@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { UserProfile, FormValidation } from '../types/profile'
+import { UserGoal } from '@core/types/server'
 
 export class ProfileManager {
   private static PROFILE_KEY = 'user_profile'
@@ -172,8 +173,8 @@ export class ProfileManager {
 
     // 验证健身目标
     if (profile.fitnessGoal !== undefined) {
-      const validGoals = ['lose-fat', 'build-muscle', 'improve-fitness', 'maintain-weight']
-      if (!profile.fitnessGoal || !validGoals.includes(profile.fitnessGoal)) {
+      const validGoals: UserGoal[] = ['LOSE_FAT', 'BUILD_MUSCLE', 'MAINTAIN'] // Uses shared UserGoal type
+      if (!profile.fitnessGoal || !validGoals.includes(profile.fitnessGoal as UserGoal)) {
         errors.fitnessGoal = 'Please select a valid fitness goal'
       }
     }

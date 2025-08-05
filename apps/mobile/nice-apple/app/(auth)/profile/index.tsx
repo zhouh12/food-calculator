@@ -12,27 +12,24 @@ import { StatusBar } from 'expo-status-bar'
 import { LinearGradient } from 'expo-linear-gradient'
 import { FITNESS_GOALS } from '../../../types/profile'
 import { ProfileManager } from '../../../utils/profileManager'
+import { UserGoal } from '@core/types/server'
 import AnimatedButton from '@/components/ui/AnimatedButton'
 import AnimatedProgressBar from '@/components/ui/AnimatedProgressBar'
 import AnimatedGoalCard from './components/AnimatedGoalCard'
 
-// 主页面组件
 export default function FitnessGoalScreen() {
-  const [selectedGoal, setSelectedGoal] = useState<string>('build-muscle')
+  const [selectedGoal, setSelectedGoal] = useState<UserGoal>('BUILD_MUSCLE')
 
   const handleNext = async () => {
     try {
-      // 保存选择的健身目标
       await ProfileManager.saveProfile({ fitnessGoal: selectedGoal })
       await ProfileManager.saveOnboardingStep(2)
 
       console.log('Selected goal:', selectedGoal)
 
-      // 导航到下一步
       router.push('/(auth)/profile/step2')
     } catch (error) {
       console.error('Failed to save fitness goal:', error)
-      // 这里可以显示错误提示
     }
   }
 
@@ -60,7 +57,6 @@ export default function FitnessGoalScreen() {
       </View>
 
       <View className="flex-1 px-6 pt-6">
-        {/* 进度条 */}
         <AnimatedProgressBar currentStep={1} totalSteps={6} />
 
         <ScrollView
@@ -68,7 +64,6 @@ export default function FitnessGoalScreen() {
           className="flex-1"
           contentContainerStyle={{ paddingBottom: 100 }}
         >
-          {/* 标题区域 */}
           <Animated.View className="mb-8" style={headerStyle}>
             <Animated.Text
               className="text-3xl font-bold text-gray-900 mb-4"
@@ -84,7 +79,6 @@ export default function FitnessGoalScreen() {
             </Animated.Text>
           </Animated.View>
 
-          {/* 目标选项 */}
           <View className="mb-8">
             {FITNESS_GOALS.map((goal, index) => (
               <AnimatedGoalCard
@@ -98,7 +92,6 @@ export default function FitnessGoalScreen() {
           </View>
         </ScrollView>
 
-        {/* 底部按钮 */}
         <View className="absolute bottom-8 left-6 right-6">
           <AnimatedButton onPress={handleNext} disabled={!selectedGoal} title="Next" />
         </View>

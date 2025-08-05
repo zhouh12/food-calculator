@@ -1,6 +1,12 @@
-// 健身目标类型
+import {
+  UserGoal,
+  ActivityLevel,
+  ExperienceLevel,
+  UserPreferences as SharedUserPreferences,
+} from '@core/types/server'
+
 export interface FitnessGoal {
-  id: string
+  id: UserGoal
   title: string
   description: string
   icon: string
@@ -9,9 +15,8 @@ export interface FitnessGoal {
   gradientColors: string[]
 }
 
-// 用户资料类型
 export interface UserProfile {
-  fitnessGoal: string
+  fitnessGoal: UserGoal
   name?: string
   age?: number
   height?: number // cm
@@ -25,29 +30,14 @@ export interface UserProfile {
   createdAt?: string
   updatedAt?: string
 }
-
-// 活动水平枚举
-export type ActivityLevel = 'sedentary' | 'light' | 'moderate' | 'active' | 'very-active'
-
-// 经验水平枚举
-export type ExperienceLevel = 'beginner' | 'intermediate' | 'advanced'
-
-// 用户偏好设置
-export interface UserPreferences {
-  units: 'metric' | 'imperial'
-  notifications: boolean
-  reminderTimes: string[]
-  preferredWorkoutTime: 'morning' | 'afternoon' | 'evening'
+export interface UserPreferences extends SharedUserPreferences {
   theme: 'light' | 'dark' | 'auto'
 }
-
-// 表单验证接口
 export interface FormValidation {
   isValid: boolean
   errors: Record<string, string>
 }
 
-// API 响应类型
 export interface ApiResponse<T> {
   success: boolean
   data?: T
@@ -55,10 +45,9 @@ export interface ApiResponse<T> {
   message?: string
 }
 
-// 健身目标选项常量
 export const FITNESS_GOALS: FitnessGoal[] = [
   {
-    id: 'lose-fat',
+    id: 'LOSE_FAT', // Updated to match shared type
     title: 'Lose Fat',
     description: 'Burn fat and get leaner',
     icon: '🔥',
@@ -67,7 +56,7 @@ export const FITNESS_GOALS: FitnessGoal[] = [
     gradientColors: ['#fff7ed', '#fed7aa'],
   },
   {
-    id: 'build-muscle',
+    id: 'BUILD_MUSCLE', // Updated to match shared type
     title: 'Build Muscle',
     description: 'Get stronger and gain muscle',
     icon: '💪',
@@ -76,7 +65,7 @@ export const FITNESS_GOALS: FitnessGoal[] = [
     gradientColors: ['#faf5ff', '#e9d5ff'],
   },
   {
-    id: 'maintain-weight',
+    id: 'MAINTAIN', // Updated to match shared type
     title: 'Maintain Weight',
     description: 'Stay at your current weight',
     icon: '⚖️',
@@ -86,34 +75,34 @@ export const FITNESS_GOALS: FitnessGoal[] = [
   },
 ]
 
-// 活动水平选项
+// 活动水平选项 (updated to use shared ActivityLevel values)
 export const ACTIVITY_LEVELS = [
   {
-    id: 'sedentary' as ActivityLevel,
+    id: 'SEDENTARY' as ActivityLevel,
     title: 'Sedentary',
     description: 'Little to no exercise',
     multiplier: 1.2,
   },
   {
-    id: 'light' as ActivityLevel,
+    id: 'LIGHT' as ActivityLevel,
     title: 'Lightly Active',
     description: 'Light exercise 1-3 days/week',
     multiplier: 1.375,
   },
   {
-    id: 'moderate' as ActivityLevel,
+    id: 'MODERATE' as ActivityLevel,
     title: 'Moderately Active',
     description: 'Moderate exercise 3-5 days/week',
     multiplier: 1.55,
   },
   {
-    id: 'active' as ActivityLevel,
+    id: 'ACTIVE' as ActivityLevel,
     title: 'Very Active',
     description: 'Heavy exercise 6-7 days/week',
     multiplier: 1.725,
   },
   {
-    id: 'very-active' as ActivityLevel,
+    id: 'VERY_ACTIVE' as ActivityLevel,
     title: 'Extra Active',
     description: 'Very heavy exercise & physical job',
     multiplier: 1.9,

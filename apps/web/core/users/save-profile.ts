@@ -5,7 +5,7 @@ import { eq } from 'drizzle-orm'
 import { users } from '@/db/schema/users'
 import { profiles } from '@/db/schema/profiles'
 
-export type UserGoal = 'GAIN_WEIGHT' | 'LOSE_FAT' | 'MAINTAIN'
+export type UserGoal = 'LOSE_FAT' | 'MAINTAIN' | 'BUILD_MUSCLE'
 
 export type UpdateProfileRequest = {
   age: number

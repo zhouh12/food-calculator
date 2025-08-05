@@ -114,14 +114,14 @@ const validation = ProfileManager.validateProfile(profile)
 ```typescript
 const FITNESS_GOALS = [
   {
-    id: 'lose-fat',
+    id: 'LOSE_FAT',
     title: 'Lose Fat',
     description: 'Burn fat and get leaner',
     icon: '🔥',
     gradientColors: ['#fff7ed', '#fed7aa'],
   },
   {
-    id: 'build-muscle',
+    id: 'BUILD_MUSCLE',
     title: 'Build Muscle',
     description: 'Get stronger and gain muscle',
     icon: '💪',
