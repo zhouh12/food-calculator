@@ -12,7 +12,7 @@ function Gradient({
   small?: boolean
   conic?: boolean
   className?: string
-}): JSX.Element {
+}) {
   return (
     <span
       className={[

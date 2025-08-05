@@ -25,13 +25,5 @@
   "engines": {
     "node": ">=18"
   },
-  "type": "module",
-  "pnpm": {
-    "overrides": {
-      "react": "^18.2.0",
-      "react-dom": "^18.2.0",
-      "@types/react": "^18.2.61",
-      "@types/react-dom": "^18.2.19"
-    }
-  }
+  "type": "module"
 }
